@@ -1,39 +1,16 @@
 package com.Employee.Payroll.App.Employee.Payroll.App.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data // Generates getters, setters, toString, equals, and hashCode
+@NoArgsConstructor // Generates a no-argument constructor
+@AllArgsConstructor // Generates a constructor with all fields
 public class EmployeeDTO {
     private String name;
     private double salary;
 
-    // Constructors
-    public EmployeeDTO() {}
 
-    public EmployeeDTO(String name, double salary) {
-        this.name = name;
-        this.salary = salary;
-    }
 
-    // Getters and Setters
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
-    }
-
-    @Override
-    public String toString() {
-        return "EmployeeDTO{" +
-                "name='" + name + '\'' +
-                ", salary=" + salary +
-                '}';
-    }
 }
