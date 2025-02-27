@@ -1,7 +1,5 @@
 package com.Employee.Payroll.App.Employee.Payroll.App.dto;
 
-
-
 public class EmployeeDTO {
     private String name;
     private double salary;

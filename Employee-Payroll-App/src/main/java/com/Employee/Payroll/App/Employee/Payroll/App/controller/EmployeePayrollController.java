@@ -43,7 +43,7 @@ public class EmployeePayrollController {
         employeePayrollService.deleteEmployee(id);
     }
 
-
+    // New functionality (using EmployeeDTO)
     @GetMapping("/dto")
     public List<EmployeeDTO> getAllEmployeesDTO() {
         List<Employee> employees = employeePayrollService.getAllEmployees();
