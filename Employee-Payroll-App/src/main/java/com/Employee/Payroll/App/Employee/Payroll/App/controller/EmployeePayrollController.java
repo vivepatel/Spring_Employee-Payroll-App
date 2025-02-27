@@ -17,36 +17,62 @@ public class EmployeePayrollController {
     @Autowired
     private EmployeePayrollService employeePayrollService;
 
-    // Old functionality (using Employee)
-    @GetMapping
-    public List<Employee> getAllEmployees() {
+    // New functionality (using in-memory storage)
+    @GetMapping("/memory")
+    public List<Employee> getAllEmployeesFromMemory() {
         return employeePayrollService.getAllEmployees();
     }
 
-    @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable Long id) {
+    @GetMapping("/memory/{id}")
+    public Employee getEmployeeByIdFromMemory(@PathVariable Long id) {
         return employeePayrollService.getEmployeeById(id);
     }
 
-    @PostMapping
-    public Employee addEmployee(@RequestBody Employee employee) {
+    @PostMapping("/memory")
+    public Employee addEmployeeToMemory(@RequestBody Employee employee) {
         return employeePayrollService.addEmployee(employee);
     }
 
-    @PutMapping("/{id}")
-    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+    @PutMapping("/memory/{id}")
+    public Employee updateEmployeeInMemory(@PathVariable Long id, @RequestBody Employee employee) {
         return employeePayrollService.updateEmployee(id, employee);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteEmployee(@PathVariable Long id) {
+    @DeleteMapping("/memory/{id}")
+    public void deleteEmployeeFromMemory(@PathVariable Long id) {
         employeePayrollService.deleteEmployee(id);
     }
 
-    // New functionality (using EmployeeDTO)
+    // Old functionality (using repository)
+    @GetMapping
+    public List<Employee> getAllEmployeesFromRepository() {
+        return employeePayrollService.getAllEmployeesFromRepository();
+    }
+
+    @GetMapping("/{id}")
+    public Employee getEmployeeByIdFromRepository(@PathVariable Long id) {
+        return employeePayrollService.getEmployeeByIdFromRepository(id);
+    }
+
+    @PostMapping
+    public Employee addEmployeeToRepository(@RequestBody Employee employee) {
+        return employeePayrollService.addEmployeeToRepository(employee);
+    }
+
+    @PutMapping("/{id}")
+    public Employee updateEmployeeInRepository(@PathVariable Long id, @RequestBody Employee employee) {
+        return employeePayrollService.updateEmployeeInRepository(id, employee);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEmployeeFromRepository(@PathVariable Long id) {
+        employeePayrollService.deleteEmployeeFromRepository(id);
+    }
+
+    // DTO functionality (using repository)
     @GetMapping("/dto")
     public List<EmployeeDTO> getAllEmployeesDTO() {
-        List<Employee> employees = employeePayrollService.getAllEmployees();
+        List<Employee> employees = employeePayrollService.getAllEmployeesFromRepository();
         return employees.stream()
                 .map(EmployeeMapper::toDTO)
                 .collect(Collectors.toList());
@@ -54,14 +80,14 @@ public class EmployeePayrollController {
 
     @GetMapping("/dto/{id}")
     public EmployeeDTO getEmployeeDTOById(@PathVariable Long id) {
-        Employee employee = employeePayrollService.getEmployeeById(id);
+        Employee employee = employeePayrollService.getEmployeeByIdFromRepository(id);
         return EmployeeMapper.toDTO(employee);
     }
 
     @PostMapping("/dto")
     public EmployeeDTO addEmployeeDTO(@RequestBody EmployeeDTO employeeDTO) {
         Employee employee = EmployeeMapper.toEntity(employeeDTO);
-        Employee savedEmployee = employeePayrollService.addEmployee(employee);
+        Employee savedEmployee = employeePayrollService.addEmployeeToRepository(employee);
         return EmployeeMapper.toDTO(savedEmployee);
     }
 
@@ -69,7 +95,7 @@ public class EmployeePayrollController {
     public EmployeeDTO updateEmployeeDTO(@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO) {
         Employee employee = EmployeeMapper.toEntity(employeeDTO);
         employee.setId(id);
-        Employee updatedEmployee = employeePayrollService.updateEmployee(id, employee);
+        Employee updatedEmployee = employeePayrollService.updateEmployeeInRepository(id, employee);
         return EmployeeMapper.toDTO(updatedEmployee);
     }
 }
