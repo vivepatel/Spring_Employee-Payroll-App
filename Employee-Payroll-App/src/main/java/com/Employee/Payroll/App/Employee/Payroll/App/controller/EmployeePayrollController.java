@@ -17,7 +17,7 @@ public class EmployeePayrollController {
     @Autowired
     private EmployeePayrollService employeePayrollService;
 
-    // New functionality (using in-memory storage)
+    // In-memory endpoints
     @GetMapping("/memory")
     public List<Employee> getAllEmployeesFromMemory() {
         return employeePayrollService.getAllEmployees();
@@ -43,7 +43,7 @@ public class EmployeePayrollController {
         employeePayrollService.deleteEmployee(id);
     }
 
-    // Old functionality (using repository)
+    // Repository endpoints
     @GetMapping
     public List<Employee> getAllEmployeesFromRepository() {
         return employeePayrollService.getAllEmployeesFromRepository();
@@ -69,7 +69,7 @@ public class EmployeePayrollController {
         employeePayrollService.deleteEmployeeFromRepository(id);
     }
 
-    // DTO functionality (using repository)
+    // DTO endpoints
     @GetMapping("/dto")
     public List<EmployeeDTO> getAllEmployeesDTO() {
         List<Employee> employees = employeePayrollService.getAllEmployeesFromRepository();
