@@ -4,13 +4,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data // Generates getters, setters, toString, equals, and hashCode
-@NoArgsConstructor // Generates a no-argument constructor
-@AllArgsConstructor // Generates a constructor with all fields
+@Data
+@NoArgsConstructor
+
 public class EmployeeDTO {
     private String name;
     private double salary;
+    public EmployeeDTO(String name,double salary)
+    {
+        this.salary=salary;
+        this.name=name;
+    }
 
+    public double getSalary() {
+        return salary;
+    }
 
-
+    public String getName() {
+        return name;
+    }
 }
+
+
+
+
