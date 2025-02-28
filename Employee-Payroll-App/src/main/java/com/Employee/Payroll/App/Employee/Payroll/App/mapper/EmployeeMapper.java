@@ -6,6 +6,8 @@ import com.Employee.Payroll.App.Employee.Payroll.App.model.Employee;
 public class EmployeeMapper {
 
     // Convert Employee to EmployeeDTO
+    EmployeeDTO obj = new EmployeeDTO( "Vivek",50000);
+
     public static EmployeeDTO toDTO(Employee employee) {
         return new EmployeeDTO(employee.getName(), employee.getSalary());
     }
