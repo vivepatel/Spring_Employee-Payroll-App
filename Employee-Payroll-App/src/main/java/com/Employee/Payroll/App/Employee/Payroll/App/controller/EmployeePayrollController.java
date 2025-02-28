@@ -83,6 +83,9 @@ public class EmployeePayrollController {
         Employee employee = employeePayrollService.getEmployeeByIdFromRepository(id);
         return EmployeeMapper.toDTO(employee);
     }
+    // No-arg constructor
+    EmployeeDTO dto2 = new EmployeeDTO("John", 5000.0); // Parameterized constructor
+
 
     @PostMapping("/dto")
     public EmployeeDTO addEmployeeDTO(@RequestBody EmployeeDTO employeeDTO) {
