@@ -40,6 +40,11 @@ public class EmployeeDTO {
     public void setName(String name) {
         this.name = name;
     }
+    @Override
+    public String toString(){
+        return "EmployeeDTO{" + "name='" + name + '\'' + ", Salary=" + salary + '}';
+
+    }
 }
 
 
